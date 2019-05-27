@@ -1,3 +1,4 @@
+// REVIEW: unimportant, but generally people start from zero.
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub(crate) enum Figure {
     Own = 1,
@@ -37,6 +38,8 @@ pub(crate) struct Battlefield(pub [Option<Figure>; 9]);
 pub(crate) type IndexedLine = ([usize; 3], [Option<Figure>; 3]);
 
 impl Battlefield {
+    // REVIEW: seems unclear, since when field for tic-tac-toe became 3-dimentional?
+    //    UPD: got it. Call it index3 maybe?
     fn index(&self, i:usize, j: usize, k: usize) -> IndexedLine {
         let table = self.0;
         ([i, j, k], [table[i], table[j], table[k]])

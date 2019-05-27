@@ -72,6 +72,8 @@ pub(crate) fn print_game_board(board: &Board) {
     for (figs, nums) in board.0.chunks(3).zip(NUMPAD.chunks(3)) {
         for (fig, num) in figs.iter().zip(nums) {
             match fig {
+                // REVIEW: rendering: would look better with some spaces between characters IMO
+                // REVIEW: clippy: why not just println!("O")?
                 Some(Mark::X) => print!("{}", "X"),
                 Some(Mark::O) => print!("{}", "O"),
                 None => print!("{}", num),
@@ -97,6 +99,7 @@ impl std::fmt::Display for GameResult {
     }
 }
 
+// REVIEW: style: generally you don't need pub(crate) in a binary, just pub would do
 pub(crate) enum SessionResult {
     Finished(GameResult),
     Aborted,
@@ -110,6 +113,7 @@ pub(crate) struct GameSession {
 }
 
 impl GameSession {
+    // REVIEW: style: some vertical line breaks?
     pub(crate) fn new_session(mut buf: String) -> Result<Self> {
         let user_player = if ask_if_makes_first_turn(&mut buf)?.into() {
             Player::First

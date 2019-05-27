@@ -1,6 +1,7 @@
 use crate::battlefield::{Battlefield, Figure};
 
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
+// REVIEW: seems redundant: there's already a Figure enum with basically the same functions there.
 pub(crate) enum Mark {
     X,
     O,
@@ -36,6 +37,7 @@ impl Mark {
 }
 
 #[derive(Default)]
+// REVIEW: What's the difference with Battlefield, considering Mark and Figure are the same thing?
 pub(crate) struct Board(pub(crate) [Option<Mark>; 9]);
 
 impl Board {
@@ -64,6 +66,8 @@ impl Board {
     }
 }
 
+// REVIEW: clippy is right, passing a word of raw data is cheaper
+//         then a double-word pointer and then dereferencing it.
 fn complete_line(line: &[Option<Mark>; 3]) -> Option<Mark> {
     const X_: Option<Mark> = Some(Mark::X);
     const O_: Option<Mark> = Some(Mark::O);
@@ -76,6 +80,7 @@ fn complete_line(line: &[Option<Mark>; 3]) -> Option<Mark> {
 }
 
 #[derive(Clone, Copy, PartialEq, Eq)]
+// REVIEW: again, a bit redundant to my taste, players may well be identified as X or O
 pub(crate) enum Player {
     First,
     Second,

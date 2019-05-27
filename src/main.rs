@@ -7,6 +7,7 @@ mod game_session;
 use game_session::{GameSession, SessionResult, print_game_board};
 use ask::ask_yes_no;
 
+// REVIEW: style: not important, but I personally prefer clearer
 fn main() -> std::io::Result<()> {
     println!("Welcome to tttxo - your tic-tac-toe game!");
     let mut buf = String::new();
@@ -15,6 +16,7 @@ fn main() -> std::io::Result<()> {
     }
 
     loop {
+        // REVIEW: creating a new buffer for each session seems redundant (not that it's important in this case, lol)
         let mut session = GameSession::new_session(String::new())?;
         loop {
             println!();

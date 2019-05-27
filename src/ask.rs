@@ -9,6 +9,11 @@ pub(crate) fn ask_prompt(buf: &mut String, prompt: &'static str) -> io::Result<(
     Ok(())
 }
 
+// REVIEW: 'static bound is not necessary here, I'd advise to not to overshoot
+//          with the trait or lifetime bounds: keep them as permissive as possible
+//          for future-proofing.
+//          Same down this file.
+//          PS. Outer buffer is great
 pub(crate) fn ask_value<T: FromStr>(
     buf: &mut String,
     prompt: &'static str,
