@@ -37,7 +37,7 @@ pub(crate) struct Battlefield(pub [Option<Figure>; 9]);
 pub(crate) type IndexedLine = ([usize; 3], [Option<Figure>; 3]);
 
 impl Battlefield {
-    fn index(&self, i:usize, j: usize, k: usize) -> IndexedLine {
+    fn index3(&self, i:usize, j: usize, k: usize) -> IndexedLine {
         let table = self.0;
         ([i, j, k], [table[i], table[j], table[k]])
     }
@@ -45,24 +45,24 @@ impl Battlefield {
     /// Get all rows with corresponding indices
     pub(crate) fn rows(&self) -> [IndexedLine; 3] {
         [
-            self.index(0, 1, 2),
-            self.index(3, 4, 5),
-            self.index(6, 7, 8),
+            self.index3(0, 1, 2),
+            self.index3(3, 4, 5),
+            self.index3(6, 7, 8),
         ]
     }
 
     /// Get all columns with corresponding indices
     pub(crate) fn cols(&self) -> [IndexedLine; 3] {
         [
-            self.index(0, 3, 6),
-            self.index(1, 4, 7),
-            self.index(2, 5, 8),
+            self.index3(0, 3, 6),
+            self.index3(1, 4, 7),
+            self.index3(2, 5, 8),
         ]
     }
 
     /// Get all diagonals with corresponding indices
     pub(crate) fn diags(&self) -> [IndexedLine; 2] {
-        [self.index(0, 4, 8), self.index(2, 4, 6)]
+        [self.index3(0, 4, 8), self.index3(2, 4, 6)]
     }
 
     /// Get all lines (rows, columns and diagonals) with corresponding indices
