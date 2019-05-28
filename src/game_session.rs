@@ -72,8 +72,8 @@ pub(crate) fn print_game_board(board: &Board) {
     for (figs, nums) in board.0.chunks(3).zip(NUMPAD.chunks(3)) {
         for (fig, num) in figs.iter().zip(nums) {
             match fig {
-                Some(Mark::X) => print!("{}", "X"),
-                Some(Mark::O) => print!("{}", "O"),
+                Some(Mark::X) => print!("X"),
+                Some(Mark::O) => print!("O"),
                 None => print!("{}", num),
             }
         }
