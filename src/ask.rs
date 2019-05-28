@@ -2,7 +2,7 @@ use std::io::{self, prelude::*};
 use std::default::Default;
 use std::str::FromStr;
 
-pub(crate) fn ask_prompt(buf: &mut String, prompt: &'static str) -> io::Result<()> {
+pub(crate) fn ask_prompt(buf: &mut String, prompt: &str) -> io::Result<()> {
     io::stdout().write_all(prompt.as_bytes())?;
     io::stdout().flush()?;
     io::stdin().read_line(buf)?;
@@ -11,8 +11,8 @@ pub(crate) fn ask_prompt(buf: &mut String, prompt: &'static str) -> io::Result<(
 
 pub(crate) fn ask_value<T: FromStr>(
     buf: &mut String,
-    prompt: &'static str,
-    error_msg: &'static str,
+    prompt: &str,
+    error_msg: &str,
 ) -> io::Result<T> {
     loop {
         buf.clear();
@@ -26,8 +26,8 @@ pub(crate) fn ask_value<T: FromStr>(
 
 pub(crate) fn ask_value_or_default<T: FromStr + Default>(
     buf: &mut String,
-    prompt: &'static str,
-    error_msg: &'static str,
+    prompt: &str,
+    error_msg: &str,
 ) -> io::Result<T> {
     loop {
         buf.clear();
@@ -89,18 +89,18 @@ impl From<Answer> for bool {
 
 pub(crate) fn ask_yes_no(
     buf: &mut String,
-    prompt: &'static str,
-    error_msg: &'static str,
+    prompt: &str,
+    error_msg: &str,
 ) -> io::Result<Answer> {
     ask_value_or_default(buf, prompt, error_msg)
 }
 
 pub(crate) fn ask_value_validated<T, VF>(
     buf: &mut String,
-    prompt: &'static str,
-    error_msg: &'static str,
+    prompt: &str,
+    error_msg: &str,
     mut valid: VF,
-    validation_msg: &'static str,
+    validation_msg: &str,
 ) -> io::Result<T>
 where
     T: FromStr,
