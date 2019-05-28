@@ -64,7 +64,7 @@ impl Board {
     }
 }
 
-fn complete_line(line: &[Option<Mark>; 3]) -> Option<Mark> {
+fn complete_line(line: [Option<Mark>; 3]) -> Option<Mark> {
     const X_: Option<Mark> = Some(Mark::X);
     const O_: Option<Mark> = Some(Mark::O);
 
@@ -107,8 +107,6 @@ pub(crate) struct Game {
 
 impl Game {
     pub(crate) fn new(first_player_mark: Mark) -> Self {
-        use std::default::Default;
-
         Self {
             board: Board::default(),
             board_repr: Battlefield::default(),
@@ -154,8 +152,8 @@ impl Game {
             return Some(TurnResult::Draw)
         }
 
-        self.board.all_lines().iter()
-            .find_map(complete_line)
+        self.board.all_lines().iter() // TODO use `.copied()` instead once it hits stable
+            .find_map(|&line| complete_line(line))
             .map(|mark| TurnResult::WinOf(self.owner_of(mark)))
     }
 }
