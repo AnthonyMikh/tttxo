@@ -1,7 +1,7 @@
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub(crate) enum Figure {
-    Own = 1,
-    Enemy = 2,
+    Own,
+    Enemy,
 }
 
 impl Figure {
